@@ -39,14 +39,20 @@ class Handler implements URLHandler {
 
     public String handleRequest(URI url) throws IOException {
         if (url.getPath().equals("/")) {
-            // int filenum = 0;
-            // String print = "There are" + " files to search";
-            // return print;
-
+            int filenum = files.size();
+            String print = "There are" + filenum + " files to search";
+            return print;
+        } else if (url.getPath().equals("/search")) {
+            String[] parameters = url.getQuery().split("=");
+            if (parameters[0].equals('q')) {
+                String searchword = parameters[1];
+                int num = 0;
+                String print = "There were" + num + "files found:";
+                return print;
+            }
+            return "Don't know how to handle that path!";
         }
-        return "Don't know how to handle that path!";
     }
-}
 
 class DocSearchServer {
     public static void main(String[] args) throws IOException {
